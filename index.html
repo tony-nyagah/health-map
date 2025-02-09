@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive map of health facilities across Kenya's counties. Search, filter, and find the nearest healthcare facility to your location." />
+  <title>Kenya Health Facilities Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="app">
+    <header class="header" role="banner">
+      <h1>Kenya Health Facilities Map</h1>
+      <p>Explore healthcare facilities across Kenya's counties</p>
+    </header>
+    <main id="main-content">
+      <div class="controls" role="search" aria-label="Facility search and filters">
+        <div class="controls-wrapper">
+          <div class="control-group">
+            <label for="facilityType" id="facilityTypeLabel">Facility Type</label>
+            <select 
+              id="facilityType"
+              aria-labelledby="facilityTypeLabel"
+              aria-describedby="facilityTypeDesc">
+              <option value="">All Facility Types</option>
+            </select>
+            <div id="facilityTypeDesc" class="sr-only">Filter facilities by their type, such as hospitals, clinics, or dispensaries</div>
+          </div>
+          <div class="control-group">
+            <label for="location" id="locationLabel">County</label>
+            <select 
+              id="location"
+              aria-labelledby="locationLabel"
+              aria-describedby="locationDesc">
+              <option value="">All Counties</option>
+            </select>
+            <div id="locationDesc" class="sr-only">Filter facilities by their county location</div>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="searchFacility" id="searchLabel">Search Facility</label>
+          <div class="search-wrapper">
+            <input 
+              type="text" 
+              id="searchFacility" 
+              class="search-input" 
+              placeholder="Search for a facility..."
+              aria-labelledby="searchLabel"
+              aria-describedby="searchDesc"
+              aria-expanded="false"
+              aria-controls="searchResults"
+              role="combobox">
+            <div id="searchDesc" class="sr-only">Search for facilities by name, type, or county</div>
+            <div 
+              id="searchResults" 
+              class="search-results" 
+              role="listbox" 
+              aria-label="Search results"></div>
+          </div>
+        </div>
+        <div class="control-group">
+          <button 
+            id="nearestFacilityBtn" 
+            class="nearest-facility-btn"
+            aria-describedby="nearestFacilityDesc">
+            <span class="icon" aria-hidden="true">📍</span>
+            Find Nearest Facility
+          </button>
+          <div id="nearestFacilityDesc" class="sr-only">Uses your current location to find the closest health facility</div>
+        </div>
+      </div>
+      <div class="facility-counter" role="status" aria-live="polite" aria-atomic="true">
+        Showing <strong id="facilityCount">0</strong> health facilities
+      </div>
+      <div id="accessibility-announcements" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+      <div id="accessibility-alerts" class="sr-only" role="alert" aria-live="assertive" aria-atomic="true"></div>
+      <div 
+        id="map" 
+        role="application" 
+        aria-label="Interactive map of health facilities"
+        tabindex="0"></div>
+    </main>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
